@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.Collection;
 
 @Repository
@@ -13,8 +14,8 @@ public class CustomerService {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public CustomerService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public CustomerService(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     public Collection<Customer> findAll() {
